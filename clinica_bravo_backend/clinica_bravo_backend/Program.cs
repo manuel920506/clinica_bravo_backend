@@ -21,8 +21,11 @@ using Microsoft.OpenApi.Models;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using clinica_bravo_backend.Utils;
+using clinica_bravo_backend; 
 
 var builder = WebApplication.CreateBuilder(args);
+
+ 
 
 builder.Services.AddAutoMapper(typeof(Program));
 
@@ -46,6 +49,11 @@ builder.Services.AddTransient<MyActionFilter>();
 builder.Services.AddControllers(options => {
     options.Filters.Add(typeof(ExceptionFilter));
 });
+
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options => 
+options.UseSqlServer(connectionString, sqlServer => sqlServer.UseNetTopologySuite())); 
 
 builder.Services.AddCors(options => {
     var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
