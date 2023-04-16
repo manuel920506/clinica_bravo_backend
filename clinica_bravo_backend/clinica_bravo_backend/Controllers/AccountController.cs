@@ -34,17 +34,17 @@ namespace clinica_bravo_backend.Controllers {
             }
         }
 
-        [HttpPost("Create")]
-        public async Task<ActionResult<AuthenticationResponse>> Create([FromBody] UserCredentials credentials) {
-            var user = new IdentityUser { UserName = credentials.Email, Email = credentials.Email };
-            var result = await userManager.CreateAsync(user, credentials.Password);
+        //[HttpPost("Create")]
+        //public async Task<ActionResult<AuthenticationResponse>> Create([FromBody] UserCredentials credentials) {
+        //    var user = new IdentityUser { UserName = credentials.Email, Email = credentials.Email };
+        //    var result = await userManager.CreateAsync(user, credentials.Password);
 
-            if (result.Succeeded) {
-               return await CreateToken(credentials);
-            } else {
-                return BadRequest(result.Errors);
-            } 
-        }
+        //    if (result.Succeeded) {
+        //        return await CreateToken(credentials);
+        //    } else {
+        //        return BadRequest(result.Errors);
+        //    }
+        //}
 
         private async Task<AuthenticationResponse> CreateToken(UserCredentials credentials) {
             var claims = new List<Claim>() {

@@ -12,6 +12,8 @@ namespace clinica_bravo_backend.Entities {
         [Url]
         public string URL { get; set; }
 
+        public int Order { get; set; }
+
         public List<SubTopic> SubTopics { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {

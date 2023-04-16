@@ -27,7 +27,8 @@ namespace clinica_bravo_backend.Utils
                         Id = subTopic.Id,
                         Name = subTopic.Name,
                         Description = subTopic.Description,
-                        URL = subTopic.URL
+                        URL = subTopic.URL,
+                        Order = subTopic.Order
                     });
                 }
             }

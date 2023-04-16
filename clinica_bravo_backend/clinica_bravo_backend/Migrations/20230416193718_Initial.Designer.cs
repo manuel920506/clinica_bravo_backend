@@ -12,8 +12,8 @@ using clinica_bravo_backend;
 namespace clinica_bravo_backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230411153939_UsersSystem")]
-    partial class UsersSystem
+    [Migration("20230416193718_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -239,6 +239,9 @@ namespace clinica_bravo_backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
                     b.Property<int>("TopicId")
                         .HasColumnType("int");
 
@@ -264,6 +267,9 @@ namespace clinica_bravo_backend.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
 
                     b.Property<string>("URL")
                         .IsRequired()

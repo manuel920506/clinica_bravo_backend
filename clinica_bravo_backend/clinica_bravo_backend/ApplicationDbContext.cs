@@ -20,7 +20,6 @@ namespace clinica_bravo_backend {
 
             base.OnModelCreating(modelBuilder);
         }
-
         public DbSet<Topic> Topics { get; set; }
         public DbSet<SubTopic> SubTopics { get; set; } 
     }

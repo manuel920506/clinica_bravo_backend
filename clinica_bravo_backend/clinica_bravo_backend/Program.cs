@@ -1,31 +1,16 @@
-using clinica_bravo_backend.Controllers;
 using clinica_bravo_backend.Filters;
 using clinica_bravo_backend.Repositories; 
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Logging;
-using System.Configuration;
-using AutoMapper;
-using Microsoft.AspNetCore.Hosting; 
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer; 
+using AutoMapper; 
+using Microsoft.EntityFrameworkCore; 
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using clinica_bravo_backend.Utils;
 using clinica_bravo_backend;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.EntityFrameworkCore.Metadata;
-
-
-
-
+using System.Text; 
+ 
 //var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build(); 
 var builder = WebApplication.CreateBuilder(args); 
 
@@ -56,6 +41,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
             ClockSkew = TimeSpan.Zero
        }
     );
+
+builder.Services.AddAuthorization(opciones =>
+{
+    opciones.AddPolicy("IsAdmin", policy => policy.RequireClaim("role", "admin"));
+});
+
 builder.Services.AddResponseCaching();
 // builder.Services.AddTransient LifeTime short for any request
 // builder.Services.AddScoped LifeTime medium for any request inside my http context

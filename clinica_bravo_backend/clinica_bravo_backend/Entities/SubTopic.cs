@@ -19,6 +19,8 @@ namespace clinica_bravo_backend.Entities {
         [Url]
         public string URL { get; set; }
 
+        public int Order { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
             if (!string.IsNullOrEmpty(Name)) {
                 var firstLetter = Name[0].ToString();
