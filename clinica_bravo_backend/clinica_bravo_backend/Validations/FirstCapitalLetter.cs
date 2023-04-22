@@ -2,7 +2,7 @@
 
 namespace clinica_bravo_backend.Validations
 {
-    public class FirstCapitalLetter : ValidationAttribute
+    public class FirstCapitalLetterAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

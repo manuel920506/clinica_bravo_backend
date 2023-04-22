@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using clinica_bravo_backend.DTOs;
 using clinica_bravo_backend.Entities;
+using Microsoft.AspNetCore.Identity;
 using NetTopologySuite.Geometries;  
 
 namespace clinica_bravo_backend.Utils
@@ -9,15 +10,17 @@ namespace clinica_bravo_backend.Utils
     {
         public AutoMapperProfiles(GeometryFactory geometryFactory)
         { 
-            CreateMap<SubTopic, SubTopicDTO>(); 
+            CreateMap<SubTopic, SubTopicDTO>();
 
-            CreateMap<Topic, TopicDTO>() 
-                .ForMember(x => x.SubTopics, opciones => opciones.MapFrom(MapSubtopics)); 
+            CreateMap<TopicCreationDTO, Topic>()
+                 .ForMember(x => x.URL, opciones => opciones.Ignore());
 
-        }
+            CreateMap<Topic, TopicDTO>()
+              .ForMember(x => x.SubTopics, opciones => opciones.MapFrom(MapSubtopics)); 
 
-    
-        
+
+            CreateMap<IdentityUser, UserDTO>();
+        }  
         private List<SubTopicDTO> MapSubtopics(Topic topic, TopicDTO topicDTO)
         {
             var response = new List<SubTopicDTO>();

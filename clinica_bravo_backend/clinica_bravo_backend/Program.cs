@@ -52,7 +52,8 @@ builder.Services.AddResponseCaching();
 // builder.Services.AddScoped LifeTime medium for any request inside my http context
 // builder.Services.AddSingleton LifeTime long for all time app
 
-builder.Services.AddScoped<IRepository, RepositoryInMemory>(); 
+builder.Services.AddScoped<IRepository, RepositoryInMemory>();
+builder.Services.AddTransient<IStorageFiles, AzureStorage>();
 builder.Services.AddTransient<MyActionFilter>();
 builder.Services.AddControllers(options => {
     options.Filters.Add(typeof(ExceptionFilter));

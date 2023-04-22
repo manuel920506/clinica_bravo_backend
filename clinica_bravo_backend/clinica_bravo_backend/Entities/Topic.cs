@@ -10,11 +10,11 @@ namespace clinica_bravo_backend.Entities {
         public string Name { get; set; }  
 
         [Url]
-        public string URL { get; set; }
+        public string? URL { get; set; }
 
         public int Order { get; set; }
 
-        public List<SubTopic> SubTopics { get; set; }
+        public List<SubTopic>? SubTopics { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
             if (!string.IsNullOrEmpty(Name)) {
