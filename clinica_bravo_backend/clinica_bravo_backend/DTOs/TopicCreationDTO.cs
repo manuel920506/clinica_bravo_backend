@@ -12,7 +12,7 @@ namespace clinica_bravo_backend.DTOs {
         [Required(ErrorMessage = "The field {0} is required")]
         [FirstCapitalLetter]
         public string Name { get; set; } 
-        public string URL { get; set; }
+        public IFormFile? Photo { get; set; }
 
         [ModelBinder(BinderType = typeof(TypeBinder<List<SubTopicCreationDTO>>))]
         public List<SubTopicCreationDTO>? SubTopics { get; set; }

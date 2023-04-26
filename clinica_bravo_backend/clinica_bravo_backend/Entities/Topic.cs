@@ -10,7 +10,7 @@ namespace clinica_bravo_backend.Entities {
         public string Name { get; set; }  
 
         [Url]
-        public string? URL { get; set; }
+        public string? Photo { get; set; }
 
         public int Order { get; set; }
 

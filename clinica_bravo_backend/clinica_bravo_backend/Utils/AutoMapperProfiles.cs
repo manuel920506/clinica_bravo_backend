@@ -9,15 +9,16 @@ namespace clinica_bravo_backend.Utils
     public class AutoMapperProfiles: Profile
     {
         public AutoMapperProfiles(GeometryFactory geometryFactory)
-        { 
-            CreateMap<SubTopic, SubTopicDTO>();
-
+        {
+            CreateMap<Topic, TopicCreationDTO>().ReverseMap();
             CreateMap<TopicCreationDTO, Topic>()
-                 .ForMember(x => x.URL, opciones => opciones.Ignore());
+                .ForMember(x => x.Photo, options => options.Ignore());
+
+            CreateMap<SubTopic, SubTopicDTO>().ReverseMap(); ; 
 
             CreateMap<Topic, TopicDTO>()
-              .ForMember(x => x.SubTopics, opciones => opciones.MapFrom(MapSubtopics)); 
-
+              .ForMember(x => x.Photo, opciones => opciones.Ignore())
+              .ForMember(x => x.SubTopics, opciones => opciones.MapFrom(MapSubtopics));  
 
             CreateMap<IdentityUser, UserDTO>();
         }  
@@ -30,7 +31,7 @@ namespace clinica_bravo_backend.Utils
                         Id = subTopic.Id,
                         Name = subTopic.Name,
                         Description = subTopic.Description,
-                        URL = subTopic.URL,
+                        Photo = subTopic.Photo,
                         Order = subTopic.Order
                     });
                 }

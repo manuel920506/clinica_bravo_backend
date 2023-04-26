@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace clinica_bravo_backend.Controllers {
-    [Route("api/Blog")]
     [ApiController]
+    [Route("api/Blog")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsAdmin")]
     public class BlogController : ControllerBase {
         private readonly IRepository repository; 
@@ -54,19 +54,19 @@ namespace clinica_bravo_backend.Controllers {
             var topic = await context.Topics
                 .Include(x => x.SubTopics).ThenInclude(x => x.Topic)
                 .FirstOrDefaultAsync(t => t.Id == Id);
-            if (topic == null) { return NotFound(); }
+            if (topic == null) { 
+                return NotFound(); 
+            }
             return mapper.Map<TopicDTO>(topic); 
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult<int>> Post([FromBody] TopicCreationDTO topicCreationDTO) {
+        public async Task<ActionResult<int>> Post([FromForm] TopicCreationDTO topicCreationDTO) {
             var topic = mapper.Map<Topic>(topicCreationDTO);
 
-            if (topic.URL != null) {
+            if (topic.Photo != null) {
                 //topic.URL = await storageFiles.SaveFile(container, topicCreationDTO.URL);
-            } else {
-                topic.URL = @"http://manuelrodriguez.altervista.org/";
             }
 
             context.Add(topic);
